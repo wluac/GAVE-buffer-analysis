@@ -23,10 +23,10 @@ library(exactextractr)
 #(0) Read in intermediate data sets
 
 #read in california boundary map
-CAmap<-read_sf("CA_State_Boundary.gpkg")
+CAmap<-read_sf("data/CA_State_Boundary.gpkg")
 
 #read in data for 1000 random addresses in California
-sample_address<-readRDS("sample_address.RDS")
+sample_address<-readRDS("data/sample_address.RDS")
 
 #make point object and set projection
 sample_address_pt <- sample_address%>%
@@ -41,7 +41,7 @@ ggplot()+geom_sf(data=CAmap)+geom_sf(data = sample_address_pt,color = "red")
 
 
 #read in van Donkelaar dust data and assign exposure period
-vD_dust<-readRDS("vD_dust_CA_wide.RDS")
+vD_dust<-readRDS("data/vD_dust_CA_wide.RDS")
 
 #make point object and set projection
 vD_dust_pts <- vD_dust%>%
@@ -127,7 +127,7 @@ toc()
 #read in point_list dataset 
 #this contains the relative x- and y- offsets of the grid points
 #covered in 2-, 5-, 10-, and 15-km buffers
-point_list<-readRDS("buffer_point_list.RDS")
+point_list<-readRDS("data/buffer_point_list.RDS")
 
 
 #Use the same method in (1) to calculate average dust levels within different buffers
@@ -184,7 +184,7 @@ rm(i, time, x_approx, y_approx, target_points)
 # (2) Use conventional buffer analysis to calculate different buffers
 
 #read in un-transformed dust data again
-vD_dust<-readRDS("vD_dust_CA_wide.RDS")
+vD_dust<-readRDS("data/vD_dust_CA_wide.RDS")
 #make point object and set projection
 vD_dust_pts <- vD_dust%>%
   mutate(x=lon)%>%mutate(y=lat)%>%
@@ -193,7 +193,7 @@ vD_dust_pts <- vD_dust%>%
 vD_dust_pts <- st_transform(vD_dust_pts, st_crs(CAmap))
 
 #read in un-transformed sample address again
-sample_address<-readRDS("sample_address.RDS")
+sample_address<-readRDS("data/sample_address.RDS")
 #make point object and set projection
 sample_address_pt <- sample_address%>%
   mutate(x=lon)%>%mutate(y=lat)%>%
@@ -322,7 +322,7 @@ cor(buffer_results_multi$dust_buff2, approx_results_multi$dust_buff2, use = "com
 #exactextractr need raster exposure data
 
 #read in un-transformed dust data again
-vD_dust<-readRDS("vD_dust_CA_wide.RDS")
+vD_dust<-readRDS("data/vD_dust_CA_wide.RDS")
 #make point object and set projection
 vD_dust_pts <- vD_dust%>%
   mutate(x=lon)%>%mutate(y=lat)%>%

@@ -18,7 +18,7 @@ library(ggplot2)
 #format: lat and lon with 5 decimal places
 
 #read in california boundary map
-CAmap<-read_sf("CA_State_Boundary.gpkg")
+CAmap<-read_sf("data/CA_State_Boundary.gpkg")
 
 #generate 2500 random lats and lons, within the range of California
 sample_address<-data.frame(
@@ -59,7 +59,7 @@ rm(withinCA, sample_address_pt)
 
 ###############################################################
 #(2) Read in van Donkelaar dust data and assign exposure period
-vD_dust<-readRDS("vD_dust_CA_wide.RDS")
+vD_dust<-readRDS("data/vD_dust_CA_wide.RDS")
 
 #make point object and set projection
 vD_dust_pts <- vD_dust%>%
@@ -75,8 +75,8 @@ vD_dust_pts <- st_transform(vD_dust_pts, st_crs(CAmap))
 sample_address$period<-colnames(vD_dust)[sample(3:600, 1000, replace = T)]
 
 #save sample address (use this set of address for the tests)
-#saveRDS(sample_address, "sample_address.RDS")
-sample_address<-readRDS("sample_address.RDS")
+#saveRDS(sample_address, "data/sample_address.RDS")
+sample_address<-readRDS("data/sample_address.RDS")
 
 #make point object and set projection
 sample_address_pt <- sample_address%>%
@@ -164,7 +164,7 @@ summary(point_list[point_list$buff2==1,]$lat_rel)
 
 #save dataset for future use
 point_list<-point_list[,c("lon_rel","lat_rel","buff15","buff10","buff5","buff2")]
-saveRDS(point_list,"buffer_point_list.RDS")
+saveRDS(point_list,"data/buffer_point_list.RDS")
 
 
 

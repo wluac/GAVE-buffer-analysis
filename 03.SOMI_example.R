@@ -9,7 +9,7 @@ library(data.table)
 
 #Read in SOMI dataset
 #Note: this dataset is not provided under a data use agreement with CDPH
-somi_dust<-readRDS("somi_dust.RDS")
+somi_dust<-readRDS("data/somi_dust.RDS")
 
 #Variables: 
 #VS_unique: ID
@@ -22,7 +22,7 @@ somi_dust<-readRDS("somi_dust.RDS")
 #period: exposure periods (13-23 biweekly periods per ID, depending on #gestational weeks), in the same format as the dust data variables
 
 #Read in cleaned vD dust data
-vD_dust<-readRDS("vD_dust_CA_wide.RDS")
+vD_dust<-readRDS("data/vD_dust_CA_wide.RDS")
 #Variables:
 #lon: longitude for exposure grid point
 #lat: latitude for exposure grid point
@@ -30,7 +30,7 @@ vD_dust<-readRDS("vD_dust_CA_wide.RDS")
 
 
 #Read in pre-prepared dataframe that has the points needed for matching with different buffer
-point_list<-readRDS("buffer_point_list.RDS")
+point_list<-readRDS("data/buffer_point_list.RDS")
 #Note: The code for creating this list is included in the "01.data_preparation.R" document
 
 
@@ -113,6 +113,6 @@ for (i in 1:n) {
 close(pb) # Close the progress bar after the loop
 
 # -------- SAVE --------
-saveRDS(somi_dust,"somi_dust.RDS")
-#somi_dust<-readRDS("somi_dust.RDS")
+saveRDS(somi_dust,"data/somi_dust.RDS")
+#somi_dust<-readRDS("data/somi_dust.RDS")
 
